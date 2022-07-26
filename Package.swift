@@ -1,4 +1,4 @@
-// swift-tools-version:5.5
+// swift-tools-version:5.6
 /*
  This source file is part of the Swift.org open source project
 
@@ -62,7 +62,8 @@ let package = Package(
                 "SwiftDocC",
                 .product(name: "NIOSSL", package: "swift-nio-ssl"),
                 .product(name: "NIOHTTP1", package: "swift-nio"),
-                .product(name: "ArgumentParser", package: "swift-argument-parser")
+                .product(name: "ArgumentParser", package: "swift-argument-parser"),
+                .product(name: "AsyncAlgorithms", package: "swift-async-algorithms"),
             ]),
         .testTarget(
             name: "SwiftDocCUtilitiesTests",
@@ -126,6 +127,7 @@ if ProcessInfo.processInfo.environment["SWIFTCI_USE_LOCAL_DEPS"] == nil {
         .package(url: "https://github.com/apple/swift-argument-parser", .upToNextMinor(from: "1.0.1")),
         .package(name: "SymbolKit", url: "https://github.com/apple/swift-docc-symbolkit", .branch("main")),
         .package(url: "https://github.com/apple/swift-crypto.git", .upToNextMinor(from: "1.1.2")),
+        .package(url: "https://github.com/apple/swift-async-algorithms.git", .upToNextMinor(from: "0.0.3")),
     ]
     
     // SwiftPM command plugins are only supported by Swift version 5.6 and later.

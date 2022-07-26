@@ -9,6 +9,8 @@
 */
 
 import Foundation
+ import AsyncAlgorithms
+// AsyncLazySequence.throttle(<#T##self: AsyncLazySequence<_>##AsyncLazySequence<_>#>)
 
 /// A task scheduler that throttles execution within a given time interval.
 ///
@@ -16,6 +18,7 @@ import Foundation
 /// execute only the latest scheduled task in the last amount of seconds
 /// you set via ``init(interval:)``.
 public class Throttle {
+    
     private let throttleQueue = DispatchQueue(label: "com.throttlequeue")
     private var currentTimer: DispatchSourceTimer?
     
@@ -34,6 +37,8 @@ public class Throttle {
     /// If you schedule a new block before the throttle interval has passed,
     /// the previous block is canceled in favor of the latest one.
     public func schedule(block: @escaping ()->Void) {
+//        AsynLay
+        
         throttleQueue.sync {
             if let currentTimer = currentTimer {
                 currentTimer.cancel()
@@ -47,4 +52,6 @@ public class Throttle {
             currentTimer?.resume()
         }
     }
+    
+
 }

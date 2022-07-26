@@ -13,5 +13,8 @@ import Foundation
 /// Protocol for request-response based servers.
 public protocol DocumentationServerProtocol {
     /// Processes the given message and responds using the given completion closure.
+    @available(*, renamed: "process(_:)")
     func process(_ message: Data, completion: @escaping (Data) -> ())
+    
+    func process(_ message: Data) async -> Data
 }

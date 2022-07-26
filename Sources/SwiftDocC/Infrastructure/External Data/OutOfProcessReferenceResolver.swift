@@ -414,8 +414,9 @@ private class LongRunningService: ExternalLinkResolving {
     }
     
     func sendAndWait<Request: Codable & CustomStringConvertible, Response: Codable>(request: Request?) throws -> Response {
-        let responseData = try client.sendAndWait(request)
-        return try JSONDecoder().decode(Response.self, from: responseData)
+        fatalError()
+//        let responseData = try client.sendAndWait(request)
+//        return try JSONDecoder().decode(Response.self, from: responseData)
     }
 }
 

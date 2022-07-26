@@ -6,9 +6,9 @@
 
  See https://swift.org/LICENSE.txt for license information
  See https://swift.org/CONTRIBUTORS.txt for Swift project authors
-*/
+ */
 
-import Foundation
+@_predatesConcurrency import Foundation
 
 public extension DocumentationServer {
     /// Creates a server configured with default services.
@@ -17,9 +17,9 @@ public extension DocumentationServer {
     static func createDefaultServer(
         qualityOfService: DispatchQoS,
         peer: DocumentationServer?
-    ) -> DocumentationServer {
+    ) async -> DocumentationServer {
         let server = DocumentationServer(qualityOfService: qualityOfService)
-        server.register(service: ConvertService(linkResolvingServer: peer))
+        await server.register(service: ConvertService(linkResolvingServer: peer))
         return server
     }
 }

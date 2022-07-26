@@ -18,6 +18,16 @@ public protocol DocumentationService {
     /// Processes the given documentation service message and calls the completion closure with the result as a message.
     func process(
         _ message: DocumentationServer.Message,
-        completion: @escaping (DocumentationServer.Message) -> ()
+        completion: @escaping (DocumentationServer.Message) -> Void
     )
+}
+
+extension DocumentationService {
+    func process(_ message: DocumentationServer.Message) async throws -> DocumentationServer.Message {
+        try await withCheckedThrowingContinuation { continuation in
+            process(message) { responseMessage in
+                continuation.resume(returning: responseMessage)
+            }
+        }
+    }
 }
